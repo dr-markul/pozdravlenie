@@ -1,0 +1,244 @@
+/* Основной стиль страницы */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, #121212, #333333);  /* Градиентный темный фон */
+    color: #ddd;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 1000px; /* 3D перспектива */
+}
+
+/* Контейнер для сообщения */
+.container {
+    transform: rotateX(10deg);
+    transition: transform 0.3s ease-out;
+    perspective: 1000px;
+}
+
+.container:hover {
+    transform: rotateX(5deg) rotateY(5deg);
+}
+
+/* Блок с предложением */
+.message-box {
+    background: #1f1f1f;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 600px;
+    transform-style: preserve-3d;
+}
+
+/* Заголовок */
+.title {
+    font-size: 2.5em;
+    color: #ff4081;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(255, 64, 129, 0.8);
+}
+
+/* Сообщение */
+.message {
+    font-size: 1.3em;
+    color: #eee;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Кнопки */
+.response-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Общий стиль кнопок */
+.button {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+}
+
+/* Кнопка "Да" */
+.yes {
+    background-color: #32cd32;
+    color: white;
+    box-shadow: 0px 4px 15px rgba(0, 255, 0, 0.6);
+}
+
+/* Кнопка "Нет" */
+.no {
+    background-color: #ff6347;
+    color: white;
+    box-shadow: 0px 4px 15px rgba(255, 99, 71, 0.6);
+}
+
+/* Эффект при наведении на кнопки */
+.button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Анимация фейерверков */
+.fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Стили для фейерверков */
+.fireworks .spark {
+    position: absolute;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: gold;
+    animation: sparkAnimation 1.5s ease-out forwards;
+}
+
+@keyframes sparkAnimation {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+/* Эффект дождя */
+.rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    z-index: 5;
+}
+
+.rain .drop {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+    animation: rainAnimation 0.5s linear infinite;
+}
+
+@keyframes rainAnimation {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Молнии */
+.lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.lightning .strike {
+    position: absolute;
+    width: 2px;
+    background-color: #fff;
+    height: 100vh;
+    opacity: 0;
+    animation: lightningStrike 0.2s linear;
+}
+
+@keyframes lightningStrike {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+    50% {
+        opacity: 1;
+        height: 80vh;
+    }
+    100% {
+        opacity: 0;
+        height: 0;
+    }
+}
+
+/* Шарики */
+.balloon {
+    position: absolute;
+    background-color: #ff69b4;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    animation: floatUp 6s ease-in infinite;
+    animation-delay: var(--delay);
+    transition: transform 0.3s ease;
+}
+
+.balloon:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 4px;
+    height: 40px;
+    background-color: #8b0000;  /* Веревка для шара */
+    transform: translateX(-50%);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+/* Сердечки */
+.heart {
+    position: absolute;
+    font-size: 30px;
+    animation: heartAnimation 1.5s ease-out infinite;
+    color: #ff1493;
+}
+
+@keyframes heartAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
